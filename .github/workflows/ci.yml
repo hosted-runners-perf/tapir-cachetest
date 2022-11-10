@@ -1,10 +1,10 @@
 name: CI
+
 on:
-  pull_request:
-    branches: ['**']
-  push:
-    branches: ['**']
-    tags: [v*]
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
 jobs:
   ci:
     # run on external PRs, but not on internal PRs since those will be run by push to branch
@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scala-version: [ "2.12", "2.13", "3" ]
+        scala-version: [ "3" ]
         target-platform: [ "JVM", "JS", "Native" ]
     steps:
     - name: Checkout
