@@ -1,4 +1,4 @@
-name: CI
+name: CI No Cache
 
 on:
   workflow_dispatch:
@@ -22,7 +22,6 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        cache: 'sbt'
         java-version: 11
     - name: Install sam cli
       run: |
@@ -74,6 +73,5 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 11
-          cache: 'sbt'
       - name: Check MiMa
         run: sbt -v mimaReportBinaryIssues
