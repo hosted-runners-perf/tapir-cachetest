@@ -2,17 +2,22 @@ name: CI Cache
 
 on:
   workflow_dispatch:
-  # schedule:
-    # - cron: "*/10 * * * *"
+  schedule:
+    - cron: "*/10 * * * *"
 
 jobs:
   ci:
-    runs-on: ubuntu-20.04
+    
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os:
+            - ubuntu-latest
+            - macos-latest
+            - windows-latest
         scala-version: [ "3" ]
-        target-platform: [ "JVM", "JS" ]
+        target-platform: [ "JVM" ]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
